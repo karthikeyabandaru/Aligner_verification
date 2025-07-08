@@ -1,0 +1,66 @@
+# -------------------------
+# Simulation output files
+# -------------------------
+*.log
+*.vstf
+*.wlf
+*.out
+*.rpt
+*.txt
+*.dat
+*.pb
+*.sdf
+*.ini
+*.bak
+*.swp
+*~
+*.tmp
+*.temp
+*.vpd
+*.fst
+
+# Questa/ModelSim-specific
+work/
+modelsim.ini
+transcript
+vsim.wlf
+dump.vcd
+compile.log
+sim.log
+wave.do
+
+# Simulation logs (run logs, regression summaries, etc.)
+tb/sim/logs/
+tb/sim/compile.log
+tb/sim/sim.log
+tb/sim/transcript
+tb/sim/report.txt
+tb/sim/fcover_report.txt
+
+
+# Questa coverage database & HTML report
+tb/sim/ucdb/
+tb/sim/covhtmlreport/
+tb/sim/coverage_report
+
+# Questa internal compiled library files
+tb/sim/work/
+tb/sim/@_opt/
+tb/sim/_info
+tb/sim/_lib*.qdb
+tb/sim/_lib*.qpg
+tb/sim/_lib*.qtl
+
+# Stacktrace/debug info
+tb/sim/vish_stacktrace.vstf
+tb/sim/tr_db.log
+
+# IDE and system junk
+.vscode/
+.idea/
+*.DS_Store
+
+# Optional: Ignore waveform recordings (add if using GTKWave or other tools)
+*.gtkw
+*.lxt
+
