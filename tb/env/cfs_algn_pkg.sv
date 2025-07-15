@@ -53,6 +53,12 @@ package cfs_algn_pkg;
   `include "../sequence/cfs_algn_virtual_sequence_irq_rw.sv"
   `include "../sequence/cfs_algn_virtual_sequence_reserved_bits_check.sv"
   `include "../sequence/cfs_algn_virtual_sequence_status_block_check.sv"
+  `include "../sequence/cfs_algn_virtual_sequence_split_legal_combinations.sv"
+  `include "../sequence/cfs_algn_virtual_sequence_ctrlsize_directed.sv"
+  `include "../sequence/cfs_algn_virtual_sequence_num_bytes_directed.sv"
+  `include "../sequence/cfs_algn_virtual_sequence_split_cover_directed.sv"
+  `include "../sequence/cfs_algn_virtual_sequence_split_cross_cover_directed.sv"
+  `include "../sequence/cfs_algn_virtual_sequence_ctrl4_off0_two_pkts.sv"
 
 endpackage
 

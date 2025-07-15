@@ -27,10 +27,11 @@ class cfs_algn_virtual_sequence_rx_err extends cfs_algn_virtual_sequence_rx;
 
   function void pre_randomize();
     super.pre_randomize();
-if (p_sequencer == null) begin
-    `uvm_error("PRE_RANDOMIZE", "p_sequencer is null. Cannot proceed with algn_data_width access.")
-    return;
-  end
+    if (p_sequencer == null) begin
+      `uvm_error("PRE_RANDOMIZE",
+                 "p_sequencer is null. Cannot proceed with algn_data_width access.")
+      return;
+    end
     algn_data_width = p_sequencer.model.env_config.get_algn_data_width();
   endfunction
 

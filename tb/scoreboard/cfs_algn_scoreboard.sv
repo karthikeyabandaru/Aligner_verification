@@ -260,7 +260,7 @@ class cfs_algn_scoreboard extends uvm_component implements uvm_ext_reset_handler
 
   virtual function void write_in_agent_rx(cfs_md_item_mon item_mon);
     if (!item_mon.is_active()) begin
-     cfs_md_response exp_response = exp_rx_responses.pop_front();
+      cfs_md_response exp_response = exp_rx_responses.pop_front();
 
       process_exp_rx_response_watchdog[0].kill();
 
@@ -280,7 +280,7 @@ class cfs_algn_scoreboard extends uvm_component implements uvm_ext_reset_handler
 
   virtual function void write_in_agent_tx(cfs_md_item_mon item_mon);
     if (!item_mon.is_active()) begin
- cfs_md_item_mon exp_item = exp_tx_items.pop_front();
+      cfs_md_item_mon exp_item = exp_tx_items.pop_front();
 
       process_exp_tx_item_watchdog[0].kill();
 

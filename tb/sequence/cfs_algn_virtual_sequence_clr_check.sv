@@ -27,8 +27,7 @@ class cfs_algn_virtual_sequence_clr_check extends cfs_algn_virtual_sequence_base
     // Read CNT_DROP after CLR
     p_sequencer.model.reg_block.STATUS.read(status, cnt_after);
 
-    if (cnt_after == 0)
-      `uvm_info("CLR_CHECK", "CLR bit cleared CNT_DROP successfully", UVM_LOW)
+    if (cnt_after == 0) `uvm_info("CLR_CHECK", "CLR bit cleared CNT_DROP successfully", UVM_LOW)
     else
       `uvm_error("CLR_CHECK", $sformatf("CLR bit failed to clear CNT_DROP, still = %0d", cnt_after))
 

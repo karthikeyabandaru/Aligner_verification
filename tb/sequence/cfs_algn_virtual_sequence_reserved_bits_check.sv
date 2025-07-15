@@ -7,7 +7,7 @@ class cfs_algn_virtual_sequence_reserved_bits_check extends cfs_algn_virtual_seq
   endfunction
 
   virtual task body();
-    uvm_status_e status;
+    uvm_status_e   status;
     uvm_reg_data_t read_val;
     uvm_reg_data_t written_val;
     uvm_reg_data_t expected_val;
@@ -17,7 +17,7 @@ class cfs_algn_virtual_sequence_reserved_bits_check extends cfs_algn_virtual_seq
     end
 
     // === ✅ IRQEN register: [4:0] valid, [31:5] reserved ===
-    written_val  = 32'hFFFF_FFFF;
+    written_val = 32'hFFFF_FFFF;
 
     `uvm_info(get_type_name(), "Writing 0xFFFFFFFF to IRQEN", UVM_MEDIUM)
     p_sequencer.model.reg_block.IRQEN.write(status, written_val);
@@ -30,7 +30,7 @@ class cfs_algn_virtual_sequence_reserved_bits_check extends cfs_algn_virtual_seq
 
 
     // === ✅ CTRL register: [1:0] valid (size, offset), rest reserved ===
-    written_val  = 32'hFFFF_FFF1;
+    written_val = 32'hFFFF_FFF1;
 
     `uvm_info(get_type_name(), "Writing 0xFFFFFFFF to CTRL", UVM_MEDIUM)
     p_sequencer.model.reg_block.CTRL.write(status, written_val);
@@ -45,7 +45,8 @@ class cfs_algn_virtual_sequence_reserved_bits_check extends cfs_algn_virtual_seq
     // === ✅ STATUS register: read-only ===
     p_sequencer.model.reg_block.STATUS.write(status, 'hFFFF_FFFF, UVM_FRONTDOOR);
     p_sequencer.model.reg_block.STATUS.read(status, read_val, UVM_FRONTDOOR);
-    `uvm_info(get_type_name(), $sformatf("STATUS register value (RO) = 0x%0h", read_val), UVM_MEDIUM)
+    `uvm_info(get_type_name(), $sformatf("STATUS register value (RO) = 0x%0h", read_val),
+              UVM_MEDIUM)
 
   endtask
 

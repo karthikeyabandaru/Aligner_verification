@@ -14,13 +14,13 @@ class cfs_algn_test_reserved_bits extends cfs_algn_test_base;
   endfunction
 
   virtual task run_phase(uvm_phase phase);
-cfs_algn_virtual_sequence_reserved_bits_check seq;
+    cfs_algn_virtual_sequence_reserved_bits_check seq;
     phase.raise_objection(this, "Starting Reserved Bits Test");
-#100;
+    #100;
     // Create and start the reserved bits check sequence
-   seq = cfs_algn_virtual_sequence_reserved_bits_check::type_id::create("seq");
+    seq = cfs_algn_virtual_sequence_reserved_bits_check::type_id::create("seq");
     seq.start(env.virtual_sequencer);
-#100;
+    #100;
     phase.drop_objection(this, "Reserved Bits Test Complete");
   endtask
 

@@ -7,7 +7,7 @@ class cfs_algn_virtual_sequence_irq_rw extends cfs_algn_virtual_sequence_base;
   endfunction
 
   virtual task body();
-    uvm_status_e status;
+    uvm_status_e   status;
     uvm_reg_data_t read_val;
 
     p_sequencer.model.reg_block.IRQ.read(status, read_val, UVM_FRONTDOOR);

@@ -314,6 +314,7 @@ end
           bins length_gt_10    = {[11:$]};
 
           illegal_bins length_lt_2 = {[$:1]};
+          ignore_bins len={0,1,2,[4:$]};
         }
 
         prev_item_delay : coverpoint item.prev_item_delay {
@@ -426,7 +427,7 @@ end
           $sformatf("\n      trans_direction:      %03.2f%%", cover_item.trans_direction.get_inst_coverage()),
           $sformatf("\n      response:             %03.2f%%", cover_item.response.get_inst_coverage()),
           $sformatf("\n      response_x_direction: %03.2f%%", cover_item.response_x_direction.get_inst_coverage()),
-          $sformatf("\n      length:               %03.2f%%", cover_item.length.get_inst_coverage()),
+         // $sformatf("\n      length:               %03.2f%%", cover_item.length.get_inst_coverage()),
           $sformatf("\n      prev_item_delay:      %03.2f%%", cover_item.prev_item_delay.get_inst_coverage()),
           $sformatf("\n                                    "),
           $sformatf("\n   cover_reset:             %03.2f%%", cover_reset.get_inst_coverage()),

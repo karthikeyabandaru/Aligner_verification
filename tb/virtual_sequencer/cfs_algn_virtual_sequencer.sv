@@ -9,7 +9,7 @@
 `define CFS_ALGN_VIRTUAL_SEQUENCER_SV 
 
 class cfs_algn_virtual_sequencer extends uvm_sequencer;
-virtual interface cfs_md_if #(32) md_tx_vif;
+  virtual interface cfs_md_if #(32) md_tx_vif;
 
   //Reference to the APB sequencer
   uvm_sequencer_base apb_sequencer;

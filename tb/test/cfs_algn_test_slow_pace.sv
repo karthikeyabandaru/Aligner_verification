@@ -16,7 +16,9 @@ class cfs_algn_test_slow_pace extends cfs_algn_test_base;
     fork
       begin
         cfs_md_sequence_slave_response_forever slave_seq =
-            cfs_md_sequence_slave_response_forever::type_id::create("slave_seq");
+            cfs_md_sequence_slave_response_forever::type_id::create(
+            "slave_seq"
+        );
         slave_seq.start(env.md_tx_agent.sequencer);
       end
     join_none
