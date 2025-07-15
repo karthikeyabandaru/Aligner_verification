@@ -1,8 +1,17 @@
+/*
+* Sequence Intention: To send illegal configurations to the DUT registers and
+* check whether the DUT rejects them by throwing an error.
+    * 1. Randomized number of accesses between 50 to 100
+    * 2. Generated combinations which are not part of legal combinations using
+    * a for loop and updating the register with those.
+      3. Read the value from the register and check if the value has been updated, it should not update since it's a illegal combination.
+      4. It has to throw an error CFS_APB_ERR.
+*/
 class cfs_algn_virtual_sequence_reg_illegal_config extends cfs_algn_virtual_sequence_base;
 
   rand int unsigned num_accesses;
   constraint num_accesses_default {soft num_accesses inside {[50 : 100]};}
-//  int unsigned num_accesses=5;
+  //  int unsigned num_accesses=5;
   `uvm_object_utils(cfs_algn_virtual_sequence_reg_illegal_config)
 
   function new(string name = "cfs_algn_virtual_sequence_reg_illegal_config");
@@ -26,17 +35,18 @@ class cfs_algn_virtual_sequence_reg_illegal_config extends cfs_algn_virtual_sequ
     uvm_reg ctrl_reg;
     uvm_status_e status;
     bit [31:0] reg_val;
-uvm_reg_field size_fld, offset_fld;
+    uvm_reg_field size_fld, offset_fld;
     `uvm_info("SEQ", "Starting illegal config write sequence", UVM_LOW)
 
     // Define legal combinations (size, offset)
 
     for (i = 0; i < num_accesses; i++) begin
 
-    `uvm_info("DB1",$sformatf("Inside for loop access number=%d-----------------------------------", i) , UVM_LOW)
+      `uvm_info("DB1", $sformatf(
+                "Inside for loop access number=%d-----------------------------------", i), UVM_LOW)
       // Keep generating until we get an illegal combination
       do begin
-        size = $urandom_range(1, 4);  // 3-bit field
+        size = $urandom_range(0, 4);  // 3-bit field
         offset = $urandom_range(0, 3);  // 2-bit field
         is_legal = 0;
 
@@ -54,17 +64,17 @@ uvm_reg_field size_fld, offset_fld;
       ctrl_reg.get_field_by_name("CLR").set(0);  // Assuming 0 for now
 
       //reg_val = ctrl_reg.get();
-      ctrl_reg.update(status,.parent(this), .path(UVM_FRONTDOOR));
-size_fld   = ctrl_reg.get_field_by_name("SIZE");
-offset_fld = ctrl_reg.get_field_by_name("OFFSET");
+      ctrl_reg.update(status, .parent(this), .path(UVM_FRONTDOOR));
+      size_fld   = ctrl_reg.get_field_by_name("SIZE");
+      offset_fld = ctrl_reg.get_field_by_name("OFFSET");
 
-if (size_fld != null && offset_fld != null) begin
-  `uvm_info("CTRL_WRITE", $sformatf("Wrote CTRL: SIZE = %0d, OFFSET = %0d",
-                                     size_fld.get(), offset_fld.get()), UVM_MEDIUM)
-end else begin
-  `uvm_warning("CTRL_WRITE", "SIZE or OFFSET field not found")
-end
-`uvm_info("SEQ", $sformatf("Sent illegal config: size=%0d offset=%0d", size, offset), UVM_LOW)
+      if (size_fld != null && offset_fld != null) begin
+        `uvm_info("CTRL_WRITE", $sformatf("Wrote CTRL: SIZE = %0d, OFFSET = %0d", size_fld.get(),
+                                          offset_fld.get()), UVM_MEDIUM)
+      end else begin
+        `uvm_warning("CTRL_WRITE", "SIZE or OFFSET field not found")
+      end
+      `uvm_info("SEQ", $sformatf("Sent illegal config: size=%0d offset=%0d", size, offset), UVM_LOW)
 
       wait_random_time();
     end

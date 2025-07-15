@@ -35,7 +35,8 @@ class cfs_algn_virtual_sequence_reg_config extends cfs_algn_virtual_sequence_bas
       void'(registers[reg_idx].randomize());
 
       registers[reg_idx].update(status);
-    ;end
+      ;
+    end
   endtask
 
 endclass

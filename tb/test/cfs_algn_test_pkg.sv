@@ -27,10 +27,18 @@ package cfs_algn_test_pkg;
   `include "cfs_algn_alignment_check_test.sv"
   `include "cfs_algn_test_clr_check.sv"
   `include "cfs_algn_reset_test.sv"
-  `include "cfs_algn_test_clock.sv"
   `include "cfs_algn_status_block_test.sv"
   `include "cfs_algn_test_reserved_bits.sv"
   `include "cfs_algn_test_slow_pace.sv"
+  `include "cfs_algn_clock_stability_test.sv"
+  `include "cfs_algn_test_split_legal_combinations.sv"
+  `include "cfs_algn_test_md_length_directed.sv"
+  `include "cfs_algn_test_ctrlsize_directed.sv"
+  `include "cfs_algn_test_apb_reset_cover.sv"
+  `include "cfs_algn_test_num_bytes_directed.sv"
+  `include "cfs_algn_test_split_cover_directed.sv"
+  `include "cfs_algn_test_split_cross_cover_directed.sv"
+  `include "cfs_algn_test_ctrl4_off0_two_pkts.sv"
 endpackage
 
 `endif

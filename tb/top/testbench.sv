@@ -67,10 +67,9 @@ module testbench;
                                                               "vif", md_tx_if);
 
     uvm_config_db#(virtual cfs_algn_if)::set(null, "uvm_test_top.env", "vif", algn_if);
-uvm_config_db#(virtual cfs_algn_if)::set(null, "*", "vif", algn_if);
-  uvm_config_db#(virtual cfs_md_if #(32))::set(null, "*", "md_tx_vif", md_tx_if);
-  uvm_config_db#(virtual cfs_md_if #(32))::set(null, "*", "md_rx_vif", md_rx_if);
-
+    uvm_config_db#(virtual cfs_algn_if)::set(null, "*", "vif", algn_if);
+    uvm_config_db#(virtual cfs_md_if #(32))::set(null, "*", "md_tx_vif", md_tx_if);
+    uvm_config_db#(virtual cfs_md_if #(32))::set(null, "*", "md_rx_vif", md_rx_if);
 
     //Start UVM test and phases
     run_test("");

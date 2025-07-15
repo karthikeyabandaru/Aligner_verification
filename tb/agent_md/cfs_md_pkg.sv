@@ -416,7 +416,7 @@
 
       endgroup
 
-      covergroup cover_reset with function sample(bit valid);
+     covergroup cover_reset with function sample(bit valid);
         option.per_instance = 1;
 
         access_ongoing : coverpoint valid {
@@ -973,7 +973,114 @@ class cfs_md_sequence_md_tx_ready_block extends cfs_md_sequence_base_slave;
   endtask
  
 endclass       
+class cfs_md_sequence_length_directed_7 extends cfs_md_sequence_base_slave;
 
+
+  `uvm_object_utils(cfs_md_sequence_length_directed_7)
+
+
+  function new(string name = "");
+    super.new(name);
+  endfunction
+
+  virtual task body();
+    cfs_md_item_mon item_mon;
+    p_sequencer.pending_items.get(item_mon);
+
+    begin
+      cfs_md_sequence_simple_slave seq;
+
+      `uvm_do_with(seq,
+                   {
+       // seq.item.ready_at_end == 1;
+        seq.item.length == 6;
+      })
+
+    end
+  endtask
+
+endclass
+class cfs_md_sequence_length_directed_8 extends cfs_md_sequence_base_slave;
+
+
+  `uvm_object_utils(cfs_md_sequence_length_directed_8)
+
+
+  function new(string name = "");
+    super.new(name);
+  endfunction
+
+  virtual task body();
+    cfs_md_item_mon item_mon;
+    p_sequencer.pending_items.get(item_mon);
+
+    begin
+      cfs_md_sequence_simple_slave seq;
+
+      `uvm_do_with(seq,
+                   {
+       // seq.item.ready_at_end == 1;
+        seq.item.length == 7;
+      })
+
+    end
+  endtask
+
+endclass
+class cfs_md_sequence_length_directed_9 extends cfs_md_sequence_base_slave;
+
+
+  `uvm_object_utils(cfs_md_sequence_length_directed_9)
+
+
+  function new(string name = "");
+    super.new(name);
+  endfunction
+
+  virtual task body();
+    cfs_md_item_mon item_mon;
+    p_sequencer.pending_items.get(item_mon);
+
+    begin
+      cfs_md_sequence_simple_slave seq;
+
+      `uvm_do_with(seq,
+                   {
+       // seq.item.ready_at_end == 1;
+        seq.item.length == 8;
+      })
+
+    end
+  endtask
+
+endclass
+class cfs_md_sequence_length_directed_10 extends cfs_md_sequence_base_slave;
+
+
+  `uvm_object_utils(cfs_md_sequence_length_directed_10)
+
+
+  function new(string name = "");
+    super.new(name);
+  endfunction
+
+  virtual task body();
+    cfs_md_item_mon item_mon;
+    p_sequencer.pending_items.get(item_mon);
+
+    begin
+      cfs_md_sequence_simple_slave seq;
+
+      `uvm_do_with(seq,
+                   {
+       // seq.item.ready_at_end == 1;
+        seq.item.length == 9;
+      })
+
+    end
+  endtask
+
+endclass
 /*class cfs_md_sequence_md_tx_ready_unblock extends cfs_md_sequence_base_slave;
  
   `uvm_object_utils(cfs_md_sequence_md_tx_ready_unblock)

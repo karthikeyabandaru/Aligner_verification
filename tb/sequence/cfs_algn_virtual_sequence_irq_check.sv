@@ -3,7 +3,7 @@ class cfs_algn_virtual_sequence_irq_check extends cfs_algn_virtual_sequence_base
   `uvm_object_utils(cfs_algn_virtual_sequence_irq_check)
 
   cfs_algn_virtual_sequence_rx rx_seq;
-  cfs_algn_model model; // Reference model handle
+  cfs_algn_model model;  // Reference model handle
 
   function new(string name = "");
     super.new(name);
@@ -19,7 +19,7 @@ class cfs_algn_virtual_sequence_irq_check extends cfs_algn_virtual_sequence_base
   endtask
 
   virtual task body();
-    uvm_status_e status;
+    uvm_status_e   status;
     uvm_reg_data_t irq_val;
     uvm_reg_data_t status_val;
     `uvm_info(get_type_name(), "Starting IRQ check sequence with RAL", UVM_MEDIUM)

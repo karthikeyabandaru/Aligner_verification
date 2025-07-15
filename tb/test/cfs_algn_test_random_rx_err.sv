@@ -15,17 +15,16 @@ class cfs_algn_test_random_rx_err extends cfs_algn_test_random;
   // Variables
   //protected int unsigned num_md_rx_transactions;
   //cfs_algn_virtual_sequence_rx_err rx_err_seq;
- // cfs_algn_virtual_sequence_clr_check clr_seq;
+  // cfs_algn_virtual_sequence_clr_check clr_seq;
 
   // Constructor
   function new(string name = "", uvm_component parent = null);
     super.new(name, parent);
-  //  num_md_rx_transactions = 260;
+    //  num_md_rx_transactions = 260;
 
     // Override RX with RX_ERR sequence
     cfs_algn_virtual_sequence_rx::type_id::set_type_override(
-      cfs_algn_virtual_sequence_rx_err::get_type()
-    );
+        cfs_algn_virtual_sequence_rx_err::get_type());
   endfunction
 
 endclass

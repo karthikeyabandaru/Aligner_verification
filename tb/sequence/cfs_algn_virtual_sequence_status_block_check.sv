@@ -7,7 +7,7 @@ class cfs_algn_virtual_sequence_status_block_check extends cfs_algn_virtual_sequ
   cfs_algn_model model;
   rand int unsigned num_packets;
 
-  constraint pkt_range { num_packets inside {[0:19]}; }
+  constraint pkt_range {num_packets inside {[0 : 19]};}
 
   function new(string name = "");
     super.new(name);
@@ -24,15 +24,15 @@ class cfs_algn_virtual_sequence_status_block_check extends cfs_algn_virtual_sequ
   virtual task body();
     uvm_status_e status;
     uvm_reg_data_t status_val_before, status_val_after;
-cfs_algn_virtual_sequence_rx rx_seq;
+    cfs_algn_virtual_sequence_rx rx_seq;
 
 
 
     // Step 3: Send RX packets
     for (int i = 0; i < num_packets; i++) begin
-        $display("LOOP NUMBER ----------------------------%0d",i);
+      $display("LOOP NUMBER ----------------------------%0d", i);
       rx_seq = cfs_algn_virtual_sequence_rx::type_id::create($sformatf("rx_seq_%0d", i));
-rx_seq.set_sequencer(p_sequencer);
+      rx_seq.set_sequencer(p_sequencer);
       void'(rx_seq.randomize());
       rx_seq.start(p_sequencer);
     end

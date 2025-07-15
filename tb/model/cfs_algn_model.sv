@@ -728,7 +728,7 @@ int tx_lvl;
 
 
   //Task to push to RX FIFO the incoming data
- /* protected virtual task push_to_rx_fifo(cfs_md_item_mon item);
+  /* protected virtual task push_to_rx_fifo(cfs_md_item_mon item);
     sync_push_to_rx_fifo();
 
     rx_fifo.put(item);
@@ -822,27 +822,44 @@ int tx_lvl;
         while (ctrl_size <= get_buffer_data_size()) begin
           cfs_md_item_mon tx_item = cfs_md_item_mon::type_id::create("tx_item", this);
 
+         // $display("WHILE 1-----------------------------START");
           tx_item.offset = ctrl_offset;
 
           void'(tx_item.begin_tr(buffer[0].get_begin_time()));
 
           while (tx_item.data.size() != ctrl_size) begin
             cfs_md_item_mon buffer_item = buffer.pop_front();
-
+           // $display("WHILE 2-----------------------------START");
             if (tx_item.data.size() + buffer_item.data.size() <= ctrl_size) begin
-
+             // $display("%d-------------", buffer_item.data.size());
               foreach (buffer_item.data[idx]) begin
                 tx_item.data.push_back(buffer_item.data[idx]);
               end
 
               if (tx_item.data.size() == ctrl_size) begin
+               // $display("-----------------------INSIDE IF------------------------");
                 tx_item.end_tr(buffer_item.get_end_time());
-
+                begin
+                  cfs_algn_split_info info = cfs_algn_split_info::type_id::create("info", this);
+                  info.ctrl_offset      = ctrl_offset;
+                  info.ctrl_size        = ctrl_size;
+                  info.md_offset        = buffer_item.offset;
+                  info.md_size          = buffer_item.data.size();
+                  info.num_bytes_needed = info.num_bytes_needed;
+                  `uvm_info("DEBUG1", $sformatf(
+                            "ctrl=(%d,%d),md:(%d,%d), num=%d##########################################################",
+                            info.ctrl_size,
+                            info.ctrl_offset,
+                            info.md_size,
+                            info.md_offset,
+                            info.num_bytes_needed
+                            ), UVM_LOW)
+                  port_out_split_info.write(info);
+                end
                 push_to_tx_fifo(tx_item);
               end
             end else begin
               int unsigned num_bytes_needed = ctrl_size - tx_item.data.size();
-
               cfs_md_item_mon splitted_items[$];
 
               split(num_bytes_needed, buffer_item, splitted_items);
@@ -859,12 +876,23 @@ int tx_lvl;
                 info.md_size          = buffer_item.data.size();
                 info.num_bytes_needed = num_bytes_needed;
 
+                `uvm_info("DEBUG1", $sformatf(
+                        "ctrl=(%d,%d),md:(%d,%d), num=%d---------------------------------------------------------",
+                          info.ctrl_size,
+                          info.ctrl_offset,
+                          info.md_size,
+                          info.md_offset,
+                          info.num_bytes_needed
+                          ), UVM_LOW)
                 port_out_split_info.write(info);
               end
+
             end
+           // $display("-----------------------WHILE 2 LOOP END-----------------------");
           end
 
         end
+        //$display("-----------------------WHILE 1 LOOP END-----------------------");
       end else begin
         @(posedge vif.clk);
       end

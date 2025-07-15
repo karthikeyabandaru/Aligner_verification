@@ -36,6 +36,8 @@ tb/sim/sim.log
 tb/sim/transcript
 tb/sim/report.txt
 tb/sim/fcover_report.txt
+tb/sim/merged.ucdb
+tb/sim/vsim.ucdb
 
 
 # Questa coverage database & HTML report
