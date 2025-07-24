@@ -13,7 +13,7 @@ class cfs_algn_virtual_sequence_ctrl4_off0_two_pkts
     uvm_status_e status;
     uvm_reg_data_t data;
 
-    cfs_algn_virtual_sequence_rx rx_seq2;
+cfs_algn_virtual_sequence_rx rx_seq2;
     cfs_algn_virtual_sequence_rx rx_seq1;
     //----------------------------------------------------------
     // 1. Write CTRL register: ctrl_size = 4, ctrl_offset = 0

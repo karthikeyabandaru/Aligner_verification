@@ -24,6 +24,7 @@ package cfs_algn_test_pkg;
   `include "cfs_algn_test_illegal_config.sv"
   `include "cfs_algn_test_check_access_type.sv"
   `include "cfs_algn_irq_check_test.sv"
+  `include "cfs_algn_irq_check_test_2.sv"
   `include "cfs_algn_alignment_check_test.sv"
   `include "cfs_algn_test_clr_check.sv"
   `include "cfs_algn_reset_test.sv"
@@ -39,6 +40,8 @@ package cfs_algn_test_pkg;
   `include "cfs_algn_test_split_cover_directed.sv"
   `include "cfs_algn_test_split_cross_cover_directed.sv"
   `include "cfs_algn_test_ctrl4_off0_two_pkts.sv"
+  `include "cfs_algn_test_valid_force_0.sv"
+  `include "cfs_algn_md_test_rx_size0.sv"
 endpackage
 
 `endif

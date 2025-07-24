@@ -59,6 +59,8 @@ package cfs_algn_pkg;
   `include "../sequence/cfs_algn_virtual_sequence_split_cover_directed.sv"
   `include "../sequence/cfs_algn_virtual_sequence_split_cross_cover_directed.sv"
   `include "../sequence/cfs_algn_virtual_sequence_ctrl4_off0_two_pkts.sv"
+  `include "../sequence/cfs_algn_virtual_sequence_rx_size0.sv"
+  `include "../sequence/cfs_algn_virtual_sequence_irq_check_2.sv"
 
 endpackage
 

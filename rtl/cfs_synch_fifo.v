@@ -131,7 +131,6 @@
         end
       end
     end
-
     assign push_ready = push_valid & !push_full;
 
     always_comb begin
