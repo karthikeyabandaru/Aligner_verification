@@ -14,18 +14,19 @@ Next steps to be added: Back relief
 1. Remove md_tx_ready=0
 2. Let packets go out
 */
-class cfs_algn_irq_check_test extends cfs_algn_test_base;
+class cfs_algn_irq_check_test_2 extends cfs_algn_test_base;
 
-  `uvm_component_utils(cfs_algn_irq_check_test)
+  `uvm_component_utils(cfs_algn_irq_check_test_2)
 
-  function new(string name = "cfs_algn_irq_check_test", uvm_component parent = null);
+  function new(string name = "cfs_algn_irq_check_test_2", uvm_component parent = null);
     super.new(name, parent);
   endfunction
 
   virtual task run_phase(uvm_phase phase);
-    cfs_algn_virtual_sequence_irq_check irq_seq;
+    cfs_algn_virtual_sequence_irq_check_2 irq_seq;
     cfs_algn_virtual_sequence_irq_rw rw_seq;
     cfs_algn_virtual_sequence_rx rx_seq;
+  cfs_algn_virtual_sequence_rx_err rx_err;
     int i;
     phase.raise_objection(this);
 
@@ -43,16 +44,22 @@ class cfs_algn_irq_check_test extends cfs_algn_test_base;
     join_none
 
     // === 3. Run the IRQ check virtual sequence ===
-    irq_seq = cfs_algn_virtual_sequence_irq_check::type_id::create("irq_seq");
+    irq_seq = cfs_algn_virtual_sequence_irq_check_2::type_id::create("irq_seq");
     irq_seq.randomize();
     irq_seq.start(env.virtual_sequencer);
 
+    repeat(1) begin 
+    rx_seq = cfs_algn_virtual_sequence_rx::type_id::create("rx_seq");
+    rx_seq.set_sequencer(env.virtual_sequencer);
+    rx_seq.randomize();
+    rx_seq.start(env.virtual_sequencer);
+end
     #(10ns);
 
     rw_seq = cfs_algn_virtual_sequence_irq_rw::type_id::create("rw_seq");
     rw_seq.start(env.virtual_sequencer);
     $display("[%0t] Disabling fork", $time);
-    disable block_tx;
+    /*disable block_tx;
     #10;
     fork
       begin
@@ -62,7 +69,7 @@ class cfs_algn_irq_check_test extends cfs_algn_test_base;
         );
         slave_seq.start(env.md_tx_agent.sequencer);
       end
-    join_none
+    join_none*/
 
     /*repeat(1) begin 
     rx_seq = cfs_algn_virtual_sequence_rx::type_id::create("rx_seq");

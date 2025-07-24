@@ -10,7 +10,7 @@
 class cfs_algn_test_random extends cfs_algn_test_base;
 
   //Number of MD RX transactions
-  rand protected int unsigned num_md_rx_transactions = $urandom_range(1000, 256);
+  rand protected int unsigned num_md_rx_transactions = $urandom_range(1000,256);
 
   `uvm_component_utils(cfs_algn_test_random)
 

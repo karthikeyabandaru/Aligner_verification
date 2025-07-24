@@ -267,7 +267,7 @@
       .pop_clk      (pclk),
       .pop_valid    (rx_fifo_2_ctrl_pop_valid),
       .pop_data     (rx_fifo_2_ctrl_pop_data),
-      .pop_ready    (rx_fifo_2_ctrl_pop_ready),
+      .pop_ready    (rx_fifo_2_ctrl_pop_ready),//Naming wrong
 
       .pop_full     (rx_fifo_2_regs_fifo_full),
 
@@ -327,7 +327,7 @@
 
       .pop_valid  (rx_fifo_2_ctrl_pop_valid),
       .pop_data   (rx_fifo_2_ctrl_pop_data),
-      .pop_ready  (rx_fifo_2_ctrl_pop_ready),
+      .pop_ready  (rx_fifo_2_ctrl_pop_ready),//Naming wrong
 
       .push_valid (ctrl_2_tx_fifo_push_valid),
       .push_data  (ctrl_2_tx_fifo_push_data),

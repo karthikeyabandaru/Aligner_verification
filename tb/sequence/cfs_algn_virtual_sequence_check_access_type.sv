@@ -76,6 +76,7 @@ class cfs_algn_virtual_sequence_check_access_type extends cfs_algn_virtual_seque
 
       irq_reg.write(status, 32'hABAB_ABAB, .parent(this), .path(UVM_FRONTDOOR));
       `uvm_info("ACCESS_TYPE", "IRQ attempted write (should be ignored)", UVM_LOW)
+      irq_reg.write(status, 32'h0, .parent(this), .path(UVM_FRONTDOOR));
       irq_reg.read(status, read_val, .parent(this), .path(UVM_FRONTDOOR));
       `uvm_info("ACCESS_TYPE", $sformatf("IRQ read 2 = 0x%0h", read_val), UVM_MEDIUM)
     end
