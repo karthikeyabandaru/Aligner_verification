@@ -340,13 +340,22 @@ end
           option.comment = "An APB access was ongoing at reset";
         }
       endgroup
-
+covergroup interrupt_status_cover with function sample (bit [15:0] rd_data);
+    option.per_instance = 1;
+    irq_max_drop      : coverpoint rd_data[4] {option.comment = "MAX_DROP interrupt";}
+    irq_tx_fifo_full  : coverpoint rd_data[3] {option.comment = "TX_FIFO_FULL interrupt";}
+    irq_tx_fifo_empty : coverpoint rd_data[2] {option.comment = "TX_FIFO_EMPTY interrupt";}
+    irq_rx_fifo_full  : coverpoint rd_data[1] {option.comment = "RX_FIFO_FULL interrupt";}
+    irq_rx_fifo_empty : coverpoint rd_data[0] {option.comment = "RX_FIFO_EMPTY interrupt";}
+  endgroup
       function new(string name = "", uvm_component parent);
         super.new(name, parent);
 
         cover_item = new();
         cover_item.set_inst_name($sformatf("%s_%s", get_full_name(), "cover_item"));
 
+        interrupt_status_cover= new();
+        interrupt_status_cover.set_inst_name($sformatf("%s_%s", get_full_name(), "interrupt_status_cover"));
         cover_reset = new();
         cover_reset.set_inst_name($sformatf("%s_%s", get_full_name(), "cover_reset"));
       endfunction
@@ -374,7 +383,8 @@ end
       //Port associated with port_item port
       virtual function void write_item(cfs_apb_item_mon item);
         cover_item.sample(item);
-
+  if (item.addr == 16'h00F4 && item.dir == CFS_APB_READ)
+      interrupt_status_cover.sample(item.data[15:0]);
         for(int i = 0; i < `CFS_APB_MAX_ADDR_WIDTH; i++) begin
           if(item.addr[i]) begin
             wrap_cover_addr_1.sample(i);
